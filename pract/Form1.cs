@@ -14,39 +14,63 @@ namespace pract
     {
         private Graphics graphics = null;
         private int[,] map = null;
-
-        Bitmap BitMap;
+        private int rows;
+        private int cols;
+        private int resol;
 
         public Form()
         {
             InitializeComponent();
-            BitMap = new Bitmap(pictureBox.Width, pictureBox.Height);
         }
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            if (timer.Enabled)
+            if (!timer.Enabled)
                 return;
 
+            print();
+            //graphics.Clear(Color.White);
+        }
 
+        private void print()
+        {
+            pictureBox.Image = new Bitmap(pictureBox.Width, pictureBox.Height);
+            graphics = Graphics.FromImage(pictureBox.Image);
+            Brush brushes = null;
+
+            for (int i = 0; i < cols; i ++)
+                for (int j = 0; j < rows; j ++)
+                {
+                    switch (map[i, j])
+                    {
+                        case 1:
+                            brushes = Brushes.Gray;
+                            break;
+
+                        default: break;
+                    }
+                    graphics.FillRectangle(brushes, i * resol, j * resol, resol, resol);
+                }
         }
 
         private void bStart_Click(object sender, EventArgs e)
         {
+            timer.Start();
 
         }
 
         private void Form_Activated(object sender, EventArgs e)
         {
-            for (int i = 0; i < pictureBox.Width; i += 20)
-            {
-                for (int j = 0; j < pictureBox.Height; j += 20)
-                {
-                    pictureBox.Image = new Bitmap(pictureBox.Width, pictureBox.Height);
-                    graphics = Graphics.FromImage(pictureBox.Image);
-                    graphics.FillRectangle(Brushes.Crimson, 0, 0, i, j);
-                }
-            }
+            resol = 20;
+            rows = pictureBox.Height / resol;
+            cols = pictureBox.Width / resol;
+            map = new int[cols, rows];
+
+            for (int i = 0; i < cols; i++)
+                for (int j = 0; j < rows; j++)
+                    map[i, j] = 1;
+
+            //print();
         }
     }
 }
