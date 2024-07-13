@@ -17,6 +17,7 @@ namespace pract
         private int rows;
         private int cols;
         private int resol;
+        private int step;
 
         public Form()
         {
@@ -32,7 +33,10 @@ namespace pract
 
             for (int i = 0; i < cols; i++)
                 for (int j = 0; j < rows; j++)
+                {
                     map[i, j] = new Bot();
+                    map[i, j].setStatus(1);
+                }
 
             map[cols / 2, rows / 2].setStatus(2);
             print();
@@ -40,24 +44,25 @@ namespace pract
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            //graphics.Clear(Color.Black);
-            ////print();
-            //pictureBox.Refresh();
-            for (int i = 0; i < cols; i++)
-                for (int j = 0; j < rows; j++)
-                {
-                    var newMap = new int[cols, rows];
-                    switch (map[i, j])
-                    {
+            Random random = new Random();
+            Text = $"Step{++step}";
 
+            var newMap = new Bot[cols, rows];
+            for (int x = 0; x < cols; x++)
+                for (int y = 0; y < rows; y++)
+                    newMap[x, y] = new Bot();
+
+            for (int x = 0; x < cols; x++)
+                for (int y = 0; y < rows; y++)
+                {
+                    if (map[x, y].getStatus() == 2)
+                    {
+                       
                     }
                 }
-        }
 
-        private int neighbors(int x, int y)
-        {
-
-            return 0;
+            map = newMap;
+            print();
         }
 
         private void print()
@@ -91,6 +96,13 @@ namespace pract
         {
             if (timer.Enabled)
                 return;
+            step = 0;
+            for (int i = 0; i < cols; i++)
+                for (int j = 0; j < rows; j++)
+                    map[i, j].setStatus(1);
+
+            map[cols / 2, rows / 2].setStatus(2);
+            print();
             timer.Start();
         }
 

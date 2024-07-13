@@ -13,7 +13,7 @@ namespace pract
 
         public Bot() 
         {
-            status = 1;
+            status = 0;
         }
         public int getStatus()
         {
