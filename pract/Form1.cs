@@ -13,7 +13,7 @@ namespace pract
     public partial class Form : System.Windows.Forms.Form
     {
         private Graphics graphics = null;
-        private int[,] map = null;
+        private Bot[,] map;
         private int rows;
         private int cols;
         private int resol;
@@ -23,13 +23,41 @@ namespace pract
             InitializeComponent();
         }
 
+        private void Form_Activated(object sender, EventArgs e)
+        {
+            resol = 10;
+            rows = pictureBox.Height / resol;
+            cols = pictureBox.Width / resol;
+            map = new Bot[cols, rows];
+
+            for (int i = 0; i < cols; i++)
+                for (int j = 0; j < rows; j++)
+                    map[i, j] = new Bot();
+
+            map[cols / 2, rows / 2].setStatus(2);
+            print();
+        }
+
         private void timer_Tick(object sender, EventArgs e)
         {
-            if (!timer.Enabled)
-                return;
+            //graphics.Clear(Color.Black);
+            ////print();
+            //pictureBox.Refresh();
+            for (int i = 0; i < cols; i++)
+                for (int j = 0; j < rows; j++)
+                {
+                    var newMap = new int[cols, rows];
+                    switch (map[i, j])
+                    {
 
-            print();
-            //graphics.Clear(Color.White);
+                    }
+                }
+        }
+
+        private int neighbors(int x, int y)
+        {
+
+            return 0;
         }
 
         private void print()
@@ -41,36 +69,37 @@ namespace pract
             for (int i = 0; i < cols; i ++)
                 for (int j = 0; j < rows; j ++)
                 {
-                    switch (map[i, j])
+                    switch (map[i, j].getStatus())
                     {
-                        case 1:
-                            brushes = Brushes.Gray;
+                        case 0:
+                            brushes = Brushes.Black;
                             break;
-
+                        case 1:
+                            brushes = Brushes.White;
+                            break;
+                        case 2:
+                            brushes = Brushes.Red;
+                            break;
                         default: break;
                     }
                     graphics.FillRectangle(brushes, i * resol, j * resol, resol, resol);
                 }
         }
 
+        //Кнопка старт
         private void bStart_Click(object sender, EventArgs e)
         {
+            if (timer.Enabled)
+                return;
             timer.Start();
-
         }
 
-        private void Form_Activated(object sender, EventArgs e)
+        //Кнопка стоп
+        private void bStop_Click(object sender, EventArgs e)
         {
-            resol = 20;
-            rows = pictureBox.Height / resol;
-            cols = pictureBox.Width / resol;
-            map = new int[cols, rows];
-
-            for (int i = 0; i < cols; i++)
-                for (int j = 0; j < rows; j++)
-                    map[i, j] = 1;
-
-            //print();
+            if (!timer.Enabled)
+                return;
+            timer.Stop();
         }
     }
 }

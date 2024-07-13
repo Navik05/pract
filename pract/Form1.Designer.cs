@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.bStop = new System.Windows.Forms.Button();
             this.bStart = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -55,9 +56,10 @@
             // 
             // splitContainer.Panel2
             // 
+            this.splitContainer.Panel2.Controls.Add(this.bStop);
             this.splitContainer.Panel2.Controls.Add(this.bStart);
-            this.splitContainer.Size = new System.Drawing.Size(998, 579);
-            this.splitContainer.SplitterDistance = 806;
+            this.splitContainer.Size = new System.Drawing.Size(1034, 579);
+            this.splitContainer.SplitterDistance = 842;
             this.splitContainer.TabIndex = 0;
             // 
             // pictureBox
@@ -65,16 +67,27 @@
             this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox.Location = new System.Drawing.Point(0, 0);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(802, 575);
+            this.pictureBox.Size = new System.Drawing.Size(838, 575);
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
+            // 
+            // bStop
+            // 
+            this.bStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bStop.Location = new System.Drawing.Point(51, 495);
+            this.bStop.Name = "bStop";
+            this.bStop.Size = new System.Drawing.Size(106, 42);
+            this.bStop.TabIndex = 1;
+            this.bStop.Text = "Stop";
+            this.bStop.UseVisualStyleBackColor = true;
+            this.bStop.Click += new System.EventHandler(this.bStop_Click);
             // 
             // bStart
             // 
             this.bStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bStart.Location = new System.Drawing.Point(42, 49);
+            this.bStart.Location = new System.Drawing.Point(51, 450);
             this.bStart.Name = "bStart";
-            this.bStart.Size = new System.Drawing.Size(89, 31);
+            this.bStart.Size = new System.Drawing.Size(106, 39);
             this.bStart.TabIndex = 0;
             this.bStart.Text = "Start";
             this.bStart.UseVisualStyleBackColor = true;
@@ -89,7 +102,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(998, 579);
+            this.ClientSize = new System.Drawing.Size(1034, 579);
             this.Controls.Add(this.splitContainer);
             this.Name = "Form";
             this.Text = "life";
@@ -109,6 +122,7 @@
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.Button bStart;
+        private System.Windows.Forms.Button bStop;
     }
 }
 
