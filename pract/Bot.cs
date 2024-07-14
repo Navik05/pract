@@ -14,15 +14,23 @@ namespace pract
         public Bot() 
         {
             status = 0;
+            day = 0;
         }
         public int getStatus()
         {
             return status;
         }
-
         public void setStatus(int status) 
         {
             this.status = status;
+        }
+        public int getDay()
+        {
+            return day;
+        }
+        public void setDay() 
+        {
+            day++;
         }
     }
 }

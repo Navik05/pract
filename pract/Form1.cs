@@ -19,6 +19,7 @@ namespace pract
         private int resol;
         private int step;
         private int range;
+        private int incubation;
 
         public Form()
         {
@@ -49,12 +50,19 @@ namespace pract
                     switch (map[x, y].getStatus())
                     {
                         case 2:
+                            newMap[x, y] = map[x, y];
                             do
                             {
                                 i = random.Next(-range, range + 1);
                                 j = random.Next(-range, range + 1);
                             } while (i == 0 && j == 0);
-                            newMap[(x + i + cols) % cols, (y + j + rows) % rows].setStatus(2);
+
+                            if (map[(x + i + cols) % cols, (y + j + rows) % rows].getStatus() <= 1)
+                                newMap[(x + i + cols) % cols, (y + j + rows) % rows].setStatus(2);
+
+                            newMap[x, y].setDay();
+                            if (newMap[x, y].getDay() >= incubation)
+                                newMap[x, y].setStatus(3);
                             break;
                         case 3:
 
@@ -62,9 +70,13 @@ namespace pract
                         default:
                             break;
                     }
-                    if(newMap[x, y].getStatus()==0)
-                        newMap[x, y] = map[x, y];
+
                 }
+
+            for (int x = 0; x < cols; x++)
+                for (int y = 0; y < rows; y++)
+                    if (newMap[x, y].getStatus() == 0)
+                        newMap[x, y] = map[x, y];
 
             map = newMap;
             print();
@@ -123,6 +135,7 @@ namespace pract
 
         private void gameStart()
         {
+            timer.Interval = (int)numericTime.Value;
             resol = (int)numericResol.Value;
             rows = pictureBox.Height / resol;
             cols = pictureBox.Width / resol;
@@ -137,6 +150,7 @@ namespace pract
             map[cols / 2, rows / 2].setStatus(2);
 
             range = trackRange.Value;
+            incubation = trackIncubation.Value;
         }
     }
 }
