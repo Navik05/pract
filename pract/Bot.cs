@@ -9,7 +9,7 @@ namespace pract
     internal class Bot
     {
         private int status;
-
+        private int day;
 
         public Bot() 
         {

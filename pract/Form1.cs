@@ -18,6 +18,7 @@ namespace pract
         private int cols;
         private int resol;
         private int step;
+        private int range;
 
         public Form()
         {
@@ -26,19 +27,7 @@ namespace pract
 
         private void Form_Activated(object sender, EventArgs e)
         {
-            resol = 10;
-            rows = pictureBox.Height / resol;
-            cols = pictureBox.Width / resol;
-            map = new Bot[cols, rows];
-
-            for (int i = 0; i < cols; i++)
-                for (int j = 0; j < rows; j++)
-                {
-                    map[i, j] = new Bot();
-                    map[i, j].setStatus(1);
-                }
-
-            map[cols / 2, rows / 2].setStatus(2);
+            gameStart();
             print();
         }
 
@@ -52,13 +41,29 @@ namespace pract
                 for (int y = 0; y < rows; y++)
                     newMap[x, y] = new Bot();
 
+            int i, j;
+
             for (int x = 0; x < cols; x++)
                 for (int y = 0; y < rows; y++)
                 {
-                    if (map[x, y].getStatus() == 2)
+                    switch (map[x, y].getStatus())
                     {
-                       
+                        case 2:
+                            do
+                            {
+                                i = random.Next(-range, range + 1);
+                                j = random.Next(-range, range + 1);
+                            } while (i == 0 && j == 0);
+                            newMap[(x + i + cols) % cols, (y + j + rows) % rows].setStatus(2);
+                            break;
+                        case 3:
+
+                            break;
+                        default:
+                            break;
                     }
+                    if(newMap[x, y].getStatus()==0)
+                        newMap[x, y] = map[x, y];
                 }
 
             map = newMap;
@@ -76,14 +81,20 @@ namespace pract
                 {
                     switch (map[i, j].getStatus())
                     {
-                        case 0:
-                            brushes = Brushes.Black;
-                            break;
                         case 1:
                             brushes = Brushes.White;
                             break;
                         case 2:
+                            brushes = Brushes.Pink;
+                            break;
+                        case 3:
                             brushes = Brushes.Red;
+                            break;
+                        case 4:
+                            brushes = Brushes.LightGray;
+                            break;
+                        case 5:
+                            brushes = Brushes.Black;
                             break;
                         default: break;
                     }
@@ -96,12 +107,8 @@ namespace pract
         {
             if (timer.Enabled)
                 return;
-            step = 0;
-            for (int i = 0; i < cols; i++)
-                for (int j = 0; j < rows; j++)
-                    map[i, j].setStatus(1);
 
-            map[cols / 2, rows / 2].setStatus(2);
+            gameStart();
             print();
             timer.Start();
         }
@@ -112,6 +119,24 @@ namespace pract
             if (!timer.Enabled)
                 return;
             timer.Stop();
+        }
+
+        private void gameStart()
+        {
+            resol = (int)numericResol.Value;
+            rows = pictureBox.Height / resol;
+            cols = pictureBox.Width / resol;
+            map = new Bot[cols, rows];
+
+            for (int i = 0; i < cols; i++)
+                for (int j = 0; j < rows; j++)
+                {
+                    map[i, j] = new Bot();
+                    map[i, j].setStatus(1);
+                }
+            map[cols / 2, rows / 2].setStatus(2);
+
+            range = trackRange.Value;
         }
     }
 }
