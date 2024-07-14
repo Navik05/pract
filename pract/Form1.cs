@@ -41,9 +41,11 @@ namespace pract
 
         private void timer_Tick(object sender, EventArgs e)
         {
+            //подсчёт дня в шапке формы
             Random random = new Random();
             Text = $"Day{++step}";
 
+            //создание вспомогательного массива
             var newMap = new Bot[cols, rows];
             for (int x = 0; x < cols; x++)
                 for (int y = 0; y < rows; y++)
@@ -58,14 +60,17 @@ namespace pract
                     {
                         case 2:
                             newMap[x, y] = map[x, y];
+                            //реализация кол-ва контактов
                             for (int z = 0; z < contact; z++)
                             {
+                                //поиск здорового соседа
                                 do
                                 {
                                     i = random.Next(-range, range + 1);
                                     j = random.Next(-range, range + 1);
                                 } while (i == 0 && j == 0);
 
+                                //заражение
                                 if (map[(x + i + cols) % cols, (y + j + rows) % rows].getStatus() <= 1)
                                     if (random.Next(0, 10) < chance)
                                         newMap[(x + i + cols) % cols, (y + j + rows) % rows].setStatus(2);
@@ -80,6 +85,7 @@ namespace pract
                             newMap[x, y].setDay();
                             if (newMap[x, y].getDay()>= symptoms)
                             {
+                                //реализация смерти-выздоравления
                                 if (random.Next(0, 10) < deadliness)
                                     newMap[x, y].setStatus(5);
                                 else
@@ -92,6 +98,7 @@ namespace pract
 
                 }
 
+            //заполнение пробелов
             for (int x = 0; x < cols; x++)
                 for (int y = 0; y < rows; y++)
                     if (newMap[x, y].getStatus() == 0)
@@ -100,13 +107,14 @@ namespace pract
             map = newMap;
             print();
 
+            //подсчёт ботов
             int[] statistics = new int[] { 0, 0, 0, 0, 0, 0, 0 };
 
             for (int x = 0; x < cols; x++)
                 for (int y = 0; y < rows; y++)
                     statistics[map[x, y].getStatus()]++;
 
-
+            //заполнение диаграмммы
             chart.Series["Series"].Points.Clear();
             chart.Series["Series"].Points.AddXY("не болели", statistics[1]);
             chart.Series["Series"].Points[0].Color = Color.White;
@@ -121,10 +129,12 @@ namespace pract
             chart.Series["Series"].Points.AddXY("иммунитет", statistics[6]);
             chart.Series["Series"].Points[5].Color = Color.Blue;
 
+            //выход по окончанию
             if (statistics[2] == 0 && statistics[3] == 0)
                 timer.Stop();
         }
 
+        //функция вывода на экран
         private void print()
         {
             pictureBox.Image = new Bitmap(pictureBox.Width, pictureBox.Height);
@@ -184,6 +194,8 @@ namespace pract
                 timer.Stop();
             }
         }
+
+        //функция начала игры
         private void gameStart()
         {
             contact = (int)numericContact.Value;
