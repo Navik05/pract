@@ -24,6 +24,7 @@ namespace pract
         private int contact;
         private int symptoms;
         private int deadliness;
+        private bool play = false;
 
         public Form()
         {
@@ -32,6 +33,7 @@ namespace pract
 
         private void Form_Activated(object sender, EventArgs e)
         {
+            bPause.Enabled = false;
             gameStart();
             print();
         }
@@ -136,22 +138,27 @@ namespace pract
         //Кнопка старт
         private void bStart_Click(object sender, EventArgs e)
         {
-            if (timer.Enabled)
-                return;
-
+            bPause.Enabled = true;
+            bPause.Text = "Pause";
             gameStart();
             print();
             timer.Start();
-        }
 
-        //Кнопка стоп
-        private void bStop_Click(object sender, EventArgs e)
+        }
+        //Кнопка пауза
+        private void bPause_Click(object sender, EventArgs e)
         {
             if (!timer.Enabled)
-                return;
-            timer.Stop();
+            {
+                bPause.Text = "Pause";
+                timer.Start();
+            }
+            else
+            {
+                bPause.Text = "Play";
+                timer.Stop();
+            }
         }
-
         private void gameStart()
         {
             contact = (int)numericContact.Value;

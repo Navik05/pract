@@ -31,7 +31,15 @@
             this.components = new System.ComponentModel.Container();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.bPause = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.checkImmunity = new System.Windows.Forms.CheckBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.trackDeadliness = new System.Windows.Forms.TrackBar();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.trackSymptoms = new System.Windows.Forms.TrackBar();
             this.label12 = new System.Windows.Forms.Label();
@@ -52,22 +60,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.numericResol = new System.Windows.Forms.NumericUpDown();
-            this.bStop = new System.Windows.Forms.Button();
             this.bStart = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.trackDeadliness = new System.Windows.Forms.TrackBar();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.checkImmunity = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackDeadliness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackSymptoms)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericContact)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackChance)).BeginInit();
@@ -75,7 +76,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackIncubation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackRange)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericResol)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackDeadliness)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer
@@ -93,8 +93,8 @@
             // 
             // splitContainer.Panel2
             // 
+            this.splitContainer.Panel2.Controls.Add(this.bPause);
             this.splitContainer.Panel2.Controls.Add(this.panel1);
-            this.splitContainer.Panel2.Controls.Add(this.bStop);
             this.splitContainer.Panel2.Controls.Add(this.bStart);
             this.splitContainer.Size = new System.Drawing.Size(1269, 749);
             this.splitContainer.SplitterDistance = 1047;
@@ -108,6 +108,17 @@
             this.pictureBox.Size = new System.Drawing.Size(1043, 745);
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
+            // 
+            // bPause
+            // 
+            this.bPause.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bPause.Location = new System.Drawing.Point(52, 695);
+            this.bPause.Name = "bPause";
+            this.bPause.Size = new System.Drawing.Size(106, 40);
+            this.bPause.TabIndex = 7;
+            this.bPause.Text = "Pause";
+            this.bPause.UseVisualStyleBackColor = true;
+            this.bPause.Click += new System.EventHandler(this.bPause_Click);
             // 
             // panel1
             // 
@@ -142,6 +153,76 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(218, 620);
             this.panel1.TabIndex = 6;
+            // 
+            // checkImmunity
+            // 
+            this.checkImmunity.AutoSize = true;
+            this.checkImmunity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkImmunity.Location = new System.Drawing.Point(15, 412);
+            this.checkImmunity.Name = "checkImmunity";
+            this.checkImmunity.Size = new System.Drawing.Size(177, 22);
+            this.checkImmunity.TabIndex = 28;
+            this.checkImmunity.Text = "Наличие иммунитета";
+            this.checkImmunity.UseVisualStyleBackColor = true;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label18.Location = new System.Drawing.Point(171, 376);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(14, 15);
+            this.label18.TabIndex = 27;
+            this.label18.Text = "1";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label17.Location = new System.Drawing.Point(21, 376);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(14, 15);
+            this.label17.TabIndex = 26;
+            this.label17.Text = "0";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label16.Location = new System.Drawing.Point(51, 328);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(99, 18);
+            this.label16.TabIndex = 25;
+            this.label16.Text = "Летальность";
+            // 
+            // trackDeadliness
+            // 
+            this.trackDeadliness.LargeChange = 1;
+            this.trackDeadliness.Location = new System.Drawing.Point(24, 350);
+            this.trackDeadliness.Name = "trackDeadliness";
+            this.trackDeadliness.Size = new System.Drawing.Size(161, 56);
+            this.trackDeadliness.TabIndex = 24;
+            this.trackDeadliness.Value = 2;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label15.Location = new System.Drawing.Point(167, 221);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(21, 15);
+            this.label15.TabIndex = 23;
+            this.label15.Text = "15";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label14.Location = new System.Drawing.Point(16, 221);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(14, 15);
+            this.label14.TabIndex = 22;
+            this.label14.Text = "1";
             // 
             // label13
             // 
@@ -233,7 +314,7 @@
             this.trackChance.Name = "trackChance";
             this.trackChance.Size = new System.Drawing.Size(161, 56);
             this.trackChance.TabIndex = 14;
-            this.trackChance.Value = 3;
+            this.trackChance.Value = 5;
             // 
             // label8
             // 
@@ -380,21 +461,10 @@
             0,
             0});
             // 
-            // bStop
-            // 
-            this.bStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bStop.Location = new System.Drawing.Point(51, 681);
-            this.bStop.Name = "bStop";
-            this.bStop.Size = new System.Drawing.Size(106, 42);
-            this.bStop.TabIndex = 1;
-            this.bStop.Text = "Stop";
-            this.bStop.UseVisualStyleBackColor = true;
-            this.bStop.Click += new System.EventHandler(this.bStop_Click);
-            // 
             // bStart
             // 
             this.bStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bStart.Location = new System.Drawing.Point(51, 626);
+            this.bStart.Location = new System.Drawing.Point(52, 636);
             this.bStart.Name = "bStart";
             this.bStart.Size = new System.Drawing.Size(106, 39);
             this.bStart.TabIndex = 0;
@@ -405,76 +475,6 @@
             // timer
             // 
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label14.Location = new System.Drawing.Point(16, 221);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(14, 15);
-            this.label14.TabIndex = 22;
-            this.label14.Text = "1";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label15.Location = new System.Drawing.Point(167, 221);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(21, 15);
-            this.label15.TabIndex = 23;
-            this.label15.Text = "15";
-            // 
-            // trackDeadliness
-            // 
-            this.trackDeadliness.LargeChange = 1;
-            this.trackDeadliness.Location = new System.Drawing.Point(24, 350);
-            this.trackDeadliness.Name = "trackDeadliness";
-            this.trackDeadliness.Size = new System.Drawing.Size(161, 56);
-            this.trackDeadliness.TabIndex = 24;
-            this.trackDeadliness.Value = 3;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label16.Location = new System.Drawing.Point(51, 328);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(99, 18);
-            this.label16.TabIndex = 25;
-            this.label16.Text = "Летальность";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label17.Location = new System.Drawing.Point(21, 376);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(14, 15);
-            this.label17.TabIndex = 26;
-            this.label17.Text = "0";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label18.Location = new System.Drawing.Point(171, 376);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(14, 15);
-            this.label18.TabIndex = 27;
-            this.label18.Text = "1";
-            // 
-            // checkImmunity
-            // 
-            this.checkImmunity.AutoSize = true;
-            this.checkImmunity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkImmunity.Location = new System.Drawing.Point(15, 412);
-            this.checkImmunity.Name = "checkImmunity";
-            this.checkImmunity.Size = new System.Drawing.Size(177, 22);
-            this.checkImmunity.TabIndex = 28;
-            this.checkImmunity.Text = "Наличие иммунитета";
-            this.checkImmunity.UseVisualStyleBackColor = true;
             // 
             // Form
             // 
@@ -493,6 +493,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackDeadliness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackSymptoms)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericContact)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackChance)).EndInit();
@@ -500,7 +501,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackIncubation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackRange)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericResol)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackDeadliness)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -511,7 +511,6 @@
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.Button bStart;
-        private System.Windows.Forms.Button bStop;
         private System.Windows.Forms.TrackBar trackRange;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -540,6 +539,7 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.CheckBox checkImmunity;
+        private System.Windows.Forms.Button bPause;
     }
 }
 
