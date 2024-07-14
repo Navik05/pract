@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace pract
 {
@@ -98,6 +99,30 @@ namespace pract
 
             map = newMap;
             print();
+
+            int[] statistics = new int[] { 0, 0, 0, 0, 0, 0, 0 };
+
+            for (int x = 0; x < cols; x++)
+                for (int y = 0; y < rows; y++)
+                    statistics[map[x, y].getStatus()]++;
+
+
+            chart.Series["Series"].Points.Clear();
+            chart.Series["Series"].Points.AddXY("не болели", statistics[1]);
+            chart.Series["Series"].Points[0].Color = Color.White;
+            chart.Series["Series"].Points.AddXY("носители", statistics[2]);
+            chart.Series["Series"].Points[1].Color = Color.Pink;
+            chart.Series["Series"].Points.AddXY("заражены", statistics[3]);
+            chart.Series["Series"].Points[2].Color = Color.Red;
+            chart.Series["Series"].Points.AddXY("выздоровели", statistics[4]);
+            chart.Series["Series"].Points[3].Color = Color.LightGray;
+            chart.Series["Series"].Points.AddXY("умерли", statistics[5]);
+            chart.Series["Series"].Points[4].Color = Color.Black;
+            chart.Series["Series"].Points.AddXY("иммунитет", statistics[6]);
+            chart.Series["Series"].Points[5].Color = Color.Blue;
+
+            if (statistics[2] == 0 && statistics[3] == 0)
+                timer.Stop();
         }
 
         private void print()
