@@ -63,8 +63,6 @@ namespace pract
                                     j = random.Next(-range, range + 1);
                                 } while (i == 0 && j == 0);
 
-
-
                                 if (map[(x + i + cols) % cols, (y + j + rows) % rows].getStatus() <= 1)
                                     if (random.Next(0, 10) < chance)
                                         newMap[(x + i + cols) % cols, (y + j + rows) % rows].setStatus(2);
@@ -126,6 +124,9 @@ namespace pract
                         case 5:
                             brushes = Brushes.Black;
                             break;
+                        case 6:
+                            brushes = Brushes.Blue;
+                            break;
                         default: break;
                     }
                     graphics.FillRectangle(brushes, i * resol, j * resol, resol, resol);
@@ -166,12 +167,16 @@ namespace pract
             rows = pictureBox.Height / resol;
             cols = pictureBox.Width / resol;
             map = new Bot[cols, rows];
+            Random random = new Random();
 
             for (int i = 0; i < cols; i++)
                 for (int j = 0; j < rows; j++)
                 {
                     map[i, j] = new Bot();
                     map[i, j].setStatus(1);
+                    if (checkImmunity.Checked)
+                        if(random.Next(0, 100)== 0)
+                            map[i, j].setStatus(6);
                 }
             map[cols / 2, rows / 2].setStatus(2);
         }

@@ -61,6 +61,7 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
+            this.checkImmunity = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -110,6 +111,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.checkImmunity);
             this.panel1.Controls.Add(this.label18);
             this.panel1.Controls.Add(this.label17);
             this.panel1.Controls.Add(this.label16);
@@ -463,6 +465,17 @@
             this.label18.TabIndex = 27;
             this.label18.Text = "1";
             // 
+            // checkImmunity
+            // 
+            this.checkImmunity.AutoSize = true;
+            this.checkImmunity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkImmunity.Location = new System.Drawing.Point(15, 412);
+            this.checkImmunity.Name = "checkImmunity";
+            this.checkImmunity.Size = new System.Drawing.Size(177, 22);
+            this.checkImmunity.TabIndex = 28;
+            this.checkImmunity.Text = "Наличие иммунитета";
+            this.checkImmunity.UseVisualStyleBackColor = true;
+            // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -526,6 +539,7 @@
         private System.Windows.Forms.TrackBar trackDeadliness;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.CheckBox checkImmunity;
     }
 }
 
