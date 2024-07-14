@@ -20,6 +20,10 @@ namespace pract
         private int step;
         private int range;
         private int incubation;
+        private int chance;
+        private int contact;
+        private int symptoms;
+        private int deadliness;
 
         public Form()
         {
@@ -35,7 +39,7 @@ namespace pract
         private void timer_Tick(object sender, EventArgs e)
         {
             Random random = new Random();
-            Text = $"Step{++step}";
+            Text = $"Day{++step}";
 
             var newMap = new Bot[cols, rows];
             for (int x = 0; x < cols; x++)
@@ -51,21 +55,35 @@ namespace pract
                     {
                         case 2:
                             newMap[x, y] = map[x, y];
-                            do
+                            for (int z = 0; z < contact; z++)
                             {
-                                i = random.Next(-range, range + 1);
-                                j = random.Next(-range, range + 1);
-                            } while (i == 0 && j == 0);
+                                do
+                                {
+                                    i = random.Next(-range, range + 1);
+                                    j = random.Next(-range, range + 1);
+                                } while (i == 0 && j == 0);
 
-                            if (map[(x + i + cols) % cols, (y + j + rows) % rows].getStatus() <= 1)
-                                newMap[(x + i + cols) % cols, (y + j + rows) % rows].setStatus(2);
+
+
+                                if (map[(x + i + cols) % cols, (y + j + rows) % rows].getStatus() <= 1)
+                                    if (random.Next(0, 10) < chance)
+                                        newMap[(x + i + cols) % cols, (y + j + rows) % rows].setStatus(2);
+                            }
 
                             newMap[x, y].setDay();
                             if (newMap[x, y].getDay() >= incubation)
                                 newMap[x, y].setStatus(3);
                             break;
                         case 3:
-
+                            newMap[x, y] = map[x, y];
+                            newMap[x, y].setDay();
+                            if (newMap[x, y].getDay()>= symptoms)
+                            {
+                                if (random.Next(0, 10) < deadliness)
+                                    newMap[x, y].setStatus(5);
+                                else
+                                    newMap[x, y].setStatus(4);
+                            }
                             break;
                         default:
                             break;
@@ -135,7 +153,15 @@ namespace pract
 
         private void gameStart()
         {
+            contact = (int)numericContact.Value;
             timer.Interval = (int)numericTime.Value;
+            chance = trackChance.Value;
+            range = trackRange.Value;
+            incubation = trackIncubation.Value;
+            symptoms = trackSymptoms.Value + incubation;
+            deadliness = trackDeadliness.Value;
+
+            step = 0;
             resol = (int)numericResol.Value;
             rows = pictureBox.Height / resol;
             cols = pictureBox.Width / resol;
@@ -148,9 +174,6 @@ namespace pract
                     map[i, j].setStatus(1);
                 }
             map[cols / 2, rows / 2].setStatus(2);
-
-            range = trackRange.Value;
-            incubation = trackIncubation.Value;
         }
     }
 }
